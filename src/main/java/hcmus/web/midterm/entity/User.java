@@ -6,10 +6,9 @@ import java.util.Set;
 @Entity
 public class User {
 
-    @Id
-    private String userName;
     private String userFirstName;
 
+    @Id
     private String userEmail;
 
     private String userLastName;
@@ -24,14 +23,6 @@ public class User {
             }
     )
     private Set<Role> role;
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 
     public String getUserFirstName() {
         return userFirstName;

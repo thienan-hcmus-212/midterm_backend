@@ -42,7 +42,6 @@ public class UserService {
         roleDao.save(userRole);
 
         User adminUser = new User();
-        adminUser.setUserName("admin123");
         adminUser.setUserPassword(getEncodedPassword("admin@pass"));
         adminUser.setUserFirstName("admin");
         adminUser.setUserLastName("admin");
@@ -65,10 +64,10 @@ public class UserService {
 
     public ResponseEntity<?> registerNewUser(User user) {
 
-        Boolean isExisted = userDao.existsById(user.getUserName());
+        Boolean isExisted = userDao.existsById(user.getUserEmail());
 
         if (isExisted){
-            MessagePayload payload = new MessagePayload("username is existed");
+            MessagePayload payload = new MessagePayload("email is existed");
             return new ResponseEntity<>(payload, HttpStatus.BAD_REQUEST);
         } else {
             Role role = roleDao.findById("User").get();
@@ -91,8 +90,8 @@ public class UserService {
     public ResponseEntity<?> updateUserInfo(User user) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
-        String username = userDetails.getUsername();
-        User userNew = userDao.findById(username).get();
+        String userEmail = userDetails.getUsername();
+        User userNew = userDao.findById(userEmail).get();
 
         if (user.getUserFirstName()!=null){
             userNew.setUserFirstName(user.getUserFirstName());
