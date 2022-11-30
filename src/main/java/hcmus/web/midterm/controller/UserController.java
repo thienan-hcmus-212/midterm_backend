@@ -1,6 +1,7 @@
 package hcmus.web.midterm.controller;
 
 import hcmus.web.midterm.entity.User;
+import hcmus.web.midterm.service.GroupService;
 import hcmus.web.midterm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,9 +21,13 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private GroupService groupService;
+
     @PostConstruct
     public void initRoleAndUser() {
         userService.initRoleAndUser();
+        groupService.initRoleAndGroup();
     }
 
     @PostMapping({"/registerNewUser"})

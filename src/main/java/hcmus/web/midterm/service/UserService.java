@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -51,15 +52,39 @@ public class UserService {
         adminUser.setRole(adminRoles);
         userDao.save(adminUser);
 
-//        User user = new User();
-//        user.setUserName("raj123");
-//        user.setUserPassword(getEncodedPassword("raj@123"));
-//        user.setUserFirstName("raj");
-//        user.setUserLastName("sharma");
-//        Set<Role> userRoles = new HashSet<>();
-//        userRoles.add(userRole);
-//        user.setRole(userRoles);
-//        userDao.save(user);
+        User user = new User();
+        user.setUserEmail("midterm@gmail.com");
+        user.setUserPassword(getEncodedPassword("midterm@pass"));
+        user.setUserFirstName("midterm");
+        user.setUserLastName("Owner group");
+        Set<Role> userRoles = new HashSet<>();
+        userRoles.add(userRole);
+        user.setRole(userRoles);
+        userDao.save(user);
+
+        user.setUserEmail("midterm1@gmail.com");
+        user.setUserPassword(getEncodedPassword("midterm1@pass"));
+        user.setUserFirstName("midterm");
+        user.setUserLastName("Co-owner group");
+        userRoles.add(userRole);
+        user.setRole(userRoles);
+        userDao.save(user);
+
+        user.setUserEmail("midterm2@gmail.com");
+        user.setUserPassword(getEncodedPassword("midterm2@pass"));
+        user.setUserFirstName("midterm");
+        user.setUserLastName("member group");
+        userRoles.add(userRole);
+        user.setRole(userRoles);
+        userDao.save(user);
+
+        user.setUserEmail("midterm3@gmail.com");
+        user.setUserPassword(getEncodedPassword("midterm3@pass"));
+        user.setUserFirstName("midterm");
+        user.setUserLastName("member group");
+        userRoles.add(userRole);
+        user.setRole(userRoles);
+        userDao.save(user);
     }
 
     public ResponseEntity<?> registerNewUser(User user) {
@@ -92,6 +117,7 @@ public class UserService {
                 .getPrincipal();
         String userEmail = userDetails.getUsername();
         User userNew = userDao.findById(userEmail).get();
+
 
         if (user.getUserFirstName()!=null){
             userNew.setUserFirstName(user.getUserFirstName());

@@ -1,21 +1,23 @@
 package hcmus.web.midterm.entity;
 
+import hcmus.web.midterm.payload.UserPayload;
+
 public class JwtResponse {
 
-    private User user;
+    private UserPayload payload;
     private String jwtToken;
 
     public JwtResponse(User user, String jwtToken) {
-        this.user = user;
+        this.payload = new UserPayload(user);
         this.jwtToken = jwtToken;
     }
 
-    public User getUser() {
-        return user;
+    public UserPayload getPayload() {
+        return payload;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setPayload(UserPayload payload) {
+        this.payload = payload;
     }
 
     public String getJwtToken() {
